@@ -2,13 +2,14 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.27"
+      version = "~> 3.0"
     }
   }
 }
 
+# Configure the AWS Provider
 provider "aws" {
-  region  = "us-west-2"
+  region = "us-east-1"
 }
 
 resource "aws_ssm_parameter" "foo_test" {
