@@ -1,9 +1,5 @@
 name: 'production'
 
-defaults:
-  run:
-    working-directory: production
-
 on:
   push:
     paths:
