@@ -60,10 +60,6 @@ on:
         required: false
         default: 'us-west-2'
         type: string
-  
-defaults:
-  run:
-    working-directory: ${{ inputs.environment }}
 
 jobs:
   terraform:
@@ -73,11 +69,12 @@ jobs:
     permissions:
       id-token: write
       contents: read
-
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    #defaults:
-    #  run:
-    #    shell: bash
+    
+      
+    defaults:
+      run:
+        working-directory: ${{ inputs.environment }}
+        shell: bash # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
 
     steps:
     - run: sleep 5 # there's still a race condition for now
