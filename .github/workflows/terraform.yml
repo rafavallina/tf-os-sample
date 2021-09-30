@@ -50,6 +50,10 @@ on:
       role_arn:
         description: 'AWS IAM Role ARN to use to deploy with'
         required: true
+        type: string  
+      environment:
+        description: 'Environment name getting deployed'
+        required: true
         type: string
   
 
@@ -57,7 +61,7 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    # environment: production
+    environment: ${{ inputs.environment }}
     permissions:
       id-token: write
       contents: read
