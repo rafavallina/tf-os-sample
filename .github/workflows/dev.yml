@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'dev/*'
+    paths-ignore:
+      - 'dev/*/'
       
 jobs:
   call-terraform-workflow:
