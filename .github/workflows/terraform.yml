@@ -45,10 +45,13 @@
 name: 'Terraform'
 
 on:
-  push:
-    branches:
-    - main
-  pull_request:
+  workflow_call:
+    inputs:
+      role_arn:
+        description: 'AWS IAM Role ARN to use to deploy with'
+        required: true
+        type: string
+  
 
 jobs:
   terraform:
@@ -69,7 +72,7 @@ jobs:
 
     - name: Configure AWS
       run: |
-        export AWS_ROLE_ARN=arn:aws:iam::617296401743:role/TerraformGitHubActionsRole
+        export AWS_ROLE_ARN=${{ inputs.role_arn }}
         export AWS_WEB_IDENTITY_TOKEN_FILE=/tmp/awscreds
         export AWS_DEFAULT_REGION=us-west-2
 
