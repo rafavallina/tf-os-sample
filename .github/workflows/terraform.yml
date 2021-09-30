@@ -60,6 +60,11 @@ on:
         required: false
         default: 'us-west-2'
         type: string
+      service_name:
+        description: 'Service name getting deployed'
+        required: false
+        default: ''
+        type: string
 
 jobs:
   terraform:
@@ -73,7 +78,7 @@ jobs:
       
     defaults:
       run:
-        working-directory: ./production
+        working-directory: ./${{ inputs.environment }}/${{ inputs.service_name }}
         shell: bash # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
 
     steps:
