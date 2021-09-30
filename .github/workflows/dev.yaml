@@ -7,6 +7,6 @@ on:
       
 jobs:
   call-terraform-workflow:
-    uses: awishn02/tf-os-sample/.github/actions/terraform.yaml@main
+    uses: awishn02/tf-os-sample/.github/workflows/actions/terraform.yaml@main
     with:
       role_arn: 'arn:aws:iam::617296401743:role/TerraformGitHubActionsRole'
