@@ -1,5 +1,9 @@
 name: 'dev'
 
+defaults:
+  run:
+    working-directory: dev/
+
 on:
   push:
     paths:
