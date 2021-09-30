@@ -5,7 +5,6 @@ terraform {
       version = "~> 3.0"
     }
   }
-  
   backend "s3" {
     bucket = "wishnick-terraform-state-bucket-2"
     key    = "tf-os-sample/terraform.tfstate"
@@ -21,5 +20,5 @@ provider "aws" {
 resource "aws_ssm_parameter" "foo_test" {
   name  = "foo_test"
   type  = "String"
-  value = "bar "
+  value = "bar"
 }
