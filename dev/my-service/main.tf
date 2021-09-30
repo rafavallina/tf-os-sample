@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     bucket = "wishnick-terraform-states"
-    key    = "tf-os-sample/terraform.tfstate"
+    key    = "tf-os-sample/my-service/terraform.tfstate"
     region = "us-west-2"
   }
 }
