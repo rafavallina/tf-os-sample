@@ -4,8 +4,7 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 3.0"
     }
-  }
-  
+  } 
   backend "s3" {
     bucket = "wishnick-terraform-states"
     key    = "tf-os-sample/terraform.tfstate"
