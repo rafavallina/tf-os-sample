@@ -55,6 +55,11 @@ on:
         description: 'Environment name getting deployed'
         required: true
         type: string
+      aws_region:
+        description: 'AWS region'
+        required: false
+        default: 'us-west-2'
+        type: string
   
 
 jobs:
@@ -78,7 +83,7 @@ jobs:
       run: |
         export AWS_ROLE_ARN=${{ inputs.role_arn }}
         export AWS_WEB_IDENTITY_TOKEN_FILE=/tmp/awscreds
-        export AWS_DEFAULT_REGION=us-west-2
+        export AWS_DEFAULT_REGION=${{ inputs.aws_region }}
 
         echo AWS_WEB_IDENTITY_TOKEN_FILE=$AWS_WEB_IDENTITY_TOKEN_FILE >> $GITHUB_ENV
         echo AWS_ROLE_ARN=$AWS_ROLE_ARN >> $GITHUB_ENV
