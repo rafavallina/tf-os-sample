@@ -15,3 +15,4 @@ jobs:
     with:
       role_arn: 'arn:aws:iam::329410677073:role/WishnickTerraformGitHubActionsRole'
       environment: 'production'
+      aws_region: 'us-east-2'
