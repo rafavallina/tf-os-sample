@@ -1,0 +1,13 @@
+name: 'dev'
+
+on:
+  push:
+    paths:
+      - 'dev/*'
+      
+jobs:
+  dev_deploy:
+    call-terraform-workflow:
+      uses: './.github/actions/terraform.yaml@v1'
+      with:
+        role_arn: 'arn:aws:iam::617296401743:role/TerraformGitHubActionsRole'
