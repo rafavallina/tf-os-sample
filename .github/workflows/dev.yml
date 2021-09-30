@@ -5,6 +5,13 @@ on:
     paths:
       - 'dev/*'
       - '!dev/*/*'
+  workflow_call:
+    inputs:
+      service_name:
+        description: 'Service name getting deployed'
+        required: false
+        default: ''
+        type: string
       
 jobs:
   call-terraform-workflow:
@@ -12,3 +19,4 @@ jobs:
     with:
       role_arn: 'arn:aws:iam::617296401743:role/TerraformGitHubActionsRole'
       environment: 'dev'
+      service_name: ${{ inputs.service_name }}
