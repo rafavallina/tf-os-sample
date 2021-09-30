@@ -61,6 +61,9 @@ on:
         default: 'us-west-2'
         type: string
   
+defaults:
+  run:
+    working-directory: ${{ inputs.environment }}
 
 jobs:
   terraform:
