@@ -15,4 +15,3 @@ jobs:
     with:
       role_arn: 'arn:aws:iam::617296401743:role/TerraformGitHubActionsRole'
       environment: 'dev'
-      aws_region: 'us-east-2'
