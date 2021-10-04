@@ -1,4 +1,4 @@
-name: 'dev'
+name: 'dev-my-service'
 
 on:
   push:
@@ -7,6 +7,9 @@ on:
       
 jobs:
   call-terraform-workflow:
-    uses: awishn02/tf-os-sample/.github/workflows/dev.yml@main
+    uses: awishn02/tf-os-sample/.github/workflows/terraform.yml@main
     with:
+      role_arn: 'arn:aws:iam::617296401743:role/TerraformGitHubActionsRole'
+      environment: 'dev'
       service_name: 'my-service'
+
