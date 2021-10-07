@@ -89,7 +89,7 @@ jobs:
 #    - run: sleep 5 # there's still a race condition for now
     
     - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@9aaa1daa91b40ce855e24cd45fb39b2ca18aeaf1
       with:
         aws-region: ${{ inputs.aws_region }}
         role-to-assume: ${{ inputs.role_arn }}
