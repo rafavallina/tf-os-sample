@@ -20,5 +20,5 @@ provider "aws" {
 resource "aws_ssm_parameter" "foo_test" {
   name  = "foo_test"
   type  = "String"
-  value = "bar plz work nao???asdfds"
+  value = var.environment.inputs.ssm_parameter_value
 }
