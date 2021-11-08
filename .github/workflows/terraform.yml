@@ -131,5 +131,26 @@ jobs:
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
+      id: tf_apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve
+      continue-on-error: true
+      
+    - name: Install Proton Model
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        aws s3 cp s3://wishnick-arrow-test/fes_model/proton-2020-07-20.normal.json .
+        aws configure add-model --service-model "file://proton-2020-07-20.normal.json" --service-name proton  
+      
+    - name: Notify Proton Success
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.tf_apply.outcome == 'success'
+      run: |
+        # aws proton notify-resource-state-change
+        echo "Notify success!"   
+        
+    - name: Notify Proton Failure
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.tf_apply.outcome != 'success'
+      run: |
+        # aws proton notify-resource-state-change
+        echo "Notify failure!"
+      
