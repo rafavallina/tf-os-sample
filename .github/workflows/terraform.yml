@@ -95,20 +95,6 @@ jobs:
         role-to-assume: ${{ inputs.role_arn }}
         role-session-name: TF-Github-Actions
 
-#    - name: Configure AWS
-#      run: |
-#        export AWS_ROLE_ARN=${{ inputs.role_arn }}
-#        export AWS_WEB_IDENTITY_TOKEN_FILE=/tmp/awscreds
-#        export AWS_DEFAULT_REGION=${{ inputs.aws_region }}
-
-#        echo AWS_WEB_IDENTITY_TOKEN_FILE=$AWS_WEB_IDENTITY_TOKEN_FILE >> $GITHUB_ENV
-#        echo AWS_ROLE_ARN=$AWS_ROLE_ARN >> $GITHUB_ENV
-#        echo AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION >> $GITHUB_ENV
-
-#        curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r '.value' > $AWS_WEB_IDENTITY_TOKEN_FILE
-          
-    
-
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -123,6 +109,7 @@ jobs:
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -diff -check
+      continue-on-error: true
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
@@ -145,12 +132,12 @@ jobs:
     - name: Notify Proton Success
       if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.tf_apply.outcome == 'success'
       run: |
-        # aws proton notify-resource-state-change
+        aws proton notify-resource-state-change --resource-arn arn:aws:proton:us-east-1:617296401743:environment/dev --state SUCCEEDED
         echo "Notify success!"   
         
     - name: Notify Proton Failure
       if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.tf_apply.outcome != 'success'
       run: |
-        # aws proton notify-resource-state-change
+        aws proton notify-resource-state-change --resource-arn arn:aws:proton:us-east-1:617296401743:environment/dev --state FAILED
         echo "Notify failure!"
       
