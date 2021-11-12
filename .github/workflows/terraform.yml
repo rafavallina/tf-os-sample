@@ -140,7 +140,7 @@ jobs:
       run: |
         outputs=$(terraform output -json)
         echo $outputs
-        aws proton notify-resource-state-change --endpoint-url https://us-east-1.gamma.frontend.arrow.aws.dev --resource-arn arn:aws:proton:us-east-1:617296401743:environment/dev --state SUCCEEDED --output random_output=some_output
+        aws proton notify-resource-state-change --endpoint-url https://us-east-1.gamma.frontend.arrow.aws.dev --resource-arn arn:aws:proton:us-east-1:617296401743:environment/dev --state SUCCEEDED --outputs random_output=some_output
         echo "Notify success!"   
         
     - name: Notify Proton Failure
