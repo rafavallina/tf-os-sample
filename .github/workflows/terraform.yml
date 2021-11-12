@@ -85,8 +85,6 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v2
-      
-#    - run: sleep 5 # there's still a race condition for now
     
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@9aaa1daa91b40ce855e24cd45fb39b2ca18aeaf1
@@ -127,7 +125,14 @@ jobs:
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: |
         aws s3 cp s3://wishnick-arrow-test/fes_model/proton-2020-07-20.normal.json .
-        aws configure add-model --service-model "file://proton-2020-07-20.normal.json" --service-name proton  
+        aws configure add-model --service-model "file://proton-2020-07-20.normal.json" --service-name proton
+        
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@9aaa1daa91b40ce855e24cd45fb39b2ca18aeaf1
+      with:
+        aws-region: us-east-1
+        role-to-assume: ${{ inputs.role_arn }}
+        role-session-name: TF-Github-Actions
       
     - name: Notify Proton Success
       if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.tf_apply.outcome == 'success'
