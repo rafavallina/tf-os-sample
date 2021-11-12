@@ -132,12 +132,12 @@ jobs:
     - name: Notify Proton Success
       if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.tf_apply.outcome == 'success'
       run: |
-        aws proton notify-resource-state-change --resource-arn arn:aws:proton:us-east-1:617296401743:environment/dev --state SUCCEEDED
+        aws proton notify-resource-state-change --endpoint-url https://us-east-1.gamma.frontend.arrow.aws.dev --resource-arn arn:aws:proton:us-east-1:617296401743:environment/dev --state SUCCEEDED
         echo "Notify success!"   
         
     - name: Notify Proton Failure
       if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.tf_apply.outcome != 'success'
       run: |
-        aws proton notify-resource-state-change --resource-arn arn:aws:proton:us-east-1:617296401743:environment/dev --state FAILED
+        aws proton notify-resource-state-change --endpoint-url https://us-east-1.gamma.frontend.arrow.aws.dev --resource-arn arn:aws:proton:us-east-1:617296401743:environment/dev --state FAILED
         echo "Notify failure!"
       
