@@ -126,7 +126,8 @@ jobs:
       run: |
         aws s3 cp s3://wishnick-arrow-test/fes_model/proton-2020-07-20.normal.json .
         aws configure add-model --service-model "file://proton-2020-07-20.normal.json" --service-name proton
-        
+    
+    # this is only needed temporarily while we are calling the gamma endpoint
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@9aaa1daa91b40ce855e24cd45fb39b2ca18aeaf1
       with:
@@ -137,7 +138,8 @@ jobs:
     - name: Notify Proton Success
       if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.tf_apply.outcome == 'success'
       run: |
-        aws proton notify-resource-state-change --endpoint-url https://us-east-1.gamma.frontend.arrow.aws.dev --resource-arn arn:aws:proton:us-east-1:617296401743:environment/dev --state SUCCEEDED
+        outputs=$(terraform output -json)
+        aws proton notify-resource-state-change --endpoint-url https://us-east-1.gamma.frontend.arrow.aws.dev --resource-arn arn:aws:proton:us-east-1:617296401743:environment/dev --state SUCCEEDED --output $outputs
         echo "Notify success!"   
         
     - name: Notify Proton Failure
