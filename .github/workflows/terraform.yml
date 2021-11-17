@@ -140,12 +140,12 @@ jobs:
       run: |
         outputs=$(terraform output -json)
         echo $outputs
-        aws proton notify-resource-state-change --endpoint-url https://us-east-1.gamma.frontend.arrow.aws.dev --resource-arn arn:aws:proton:us-east-1:914735543492:environment/test-marcia --state SUCCEEDED --region 'us-east-1'
+        aws proton notify-resource-state-change --endpoint-url https://us-east-1.gamma.frontend.arrow.aws.dev --resource-arn arn:aws:proton:us-east-1:914735543492:environment/test-marcia-2 --state SUCCEEDED --region 'us-east-1'
         echo "Notify success!"   
         
     - name: Notify Proton Failure
       if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.tf_apply.outcome != 'success'
       run: |
-        aws proton notify-resource-state-change --endpoint-url https://us-east-1.gamma.frontend.arrow.aws.dev --resource-arn arn:aws:proton:us-east-1:914735543492:environment/test-marcia --state FAILED --region 'us-east-1'
+        aws proton notify-resource-state-change --endpoint-url https://us-east-1.gamma.frontend.arrow.aws.dev --resource-arn arn:aws:proton:us-east-1:914735543492:environment/test-marcia-2 --state FAILED --region 'us-east-1'
         echo "Notify failure!"
       
