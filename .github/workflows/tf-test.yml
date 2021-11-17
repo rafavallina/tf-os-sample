@@ -11,4 +11,4 @@ jobs:
     with:
       role_arn: 'arn:aws:iam::914735543492:role/ExampleGithubRole'
       environment: 'tf-test'
-      aws_region: 'us-east-2'
+      aws_region: 'us-east-1'
