@@ -1,0 +1,15 @@
+name: 'test-marcia-2'
+
+on:
+  push:
+    paths:
+      - 'test-marcia-2/*'
+      - '!test-marcia-2/*/*'
+      
+jobs:
+  call-terraform-workflow:
+    uses: rafavallina/tf-os-sample/.github/workflows/terraform.yml@main
+    with:
+      role_arn: 'arn:aws:iam::914735543492:role/ExampleGithubRole'
+      environment: 'test-marcia-2'
+      aws_region: 'us-east-1'
