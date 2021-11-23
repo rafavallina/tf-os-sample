@@ -1,0 +1,9 @@
+{
+  "deploymentId" : "",
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-1:914735543492:environment/test-marcia",
+    "templateArn" : "arn:aws:proton:us-east-1:914735543492:environment-template/new-terraform-test",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "0"
+  }
+}
