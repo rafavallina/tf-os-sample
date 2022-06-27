@@ -1,0 +1,10 @@
+{
+  "deploymentId" : "0e43dfc0-cf5a-4a50-98e6-8c784cfd0ce3",
+  "isResourceDeleted" : false,
+  "resourceMetadata" : {
+    "arn" : "arn:aws:proton:us-east-1:914735543492:environment/rafael-test-access",
+    "templateArn" : "arn:aws:proton:us-east-1:914735543492:environment-template/sample-vpc-environment-template",
+    "templateMajorVersion" : "1",
+    "templateMinorVersion" : "0"
+  }
+}
